@@ -1,0 +1,54 @@
+Table 1: Students
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| student_id| int(11)     | NO   | PRI | NULL    | auto_increment |
+| name      | varchar(50)| NO   |     | NULL    |                |
+| age       | int(11)     | NO   |     | NULL    |                |
+| email     | varchar(50)| NO   | UNI | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+
+Table 2: Teachers
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| teacher_id| int(11)     | NO   | PRI | NULL    | auto_increment |
+| name      | varchar(50)| NO   |     | NULL    |                |
+| age       | int(11)     | NO   |     | NULL    |                |
+| email     | varchar(50)| NO   | UNI | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+
+Table 3: Classes
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| class_id | int(11)     | NO   | PRI | NULL    | auto_increment |
+| teacher_id| int(11)     | NO   | MUL | NULL    |                |
+| name      | varchar(50)| NO   |     | NULL    |                |
+| location | varchar(50)| NO   |     | NULL    |                |
+| date      | date        | NO   |     | NULL    |                |
+| time      | time        | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+
+Table 4: Class_Enrollment
+
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| enrollment_id| int(11) | NO   | PRI | NULL    |       |
+| student_id   | int(11) | NO   | MUL | NULL    |       |
+| class_id     | int(11) | NO   | MUL | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+
+To retrieve all students enrolled in a specific course.
+
+SELECT s.* 
+FROM Students s
+JOIN Class_Enrollment ce ON s.student_id = ce.student_id
+JOIN Classes c ON ce.class_id = c.class_id
+WHERE c.class_id = ?;
+
+
+
+
+
